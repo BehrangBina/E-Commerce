@@ -24,7 +24,7 @@ namespace API
         {
             services.AddControllers();
             services.AddDbContext<StoreContext>(x=>
-            x.UseSqlite(_config.GetConnectionString("Data Source=mdc.db")));
+            x.UseSqlite(_config.GetConnectionString("DefaultConnection")));
             
         }
         // middleware
