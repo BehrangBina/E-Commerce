@@ -8,8 +8,7 @@ namespace API.Controllers
     [ApiController]
     [Route("/api/[controller]")]
     public class ProductsController : ControllerBase
-    {
-        private readonly IProductRepository _repo;
+    {     
         private readonly IGenericRepository<Product> _productRepo;
         private readonly IGenericRepository<ProductBrand> _productBrandRepo;
         private readonly IGenericRepository<ProductType> _productTypeRepo;
