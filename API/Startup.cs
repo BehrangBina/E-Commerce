@@ -29,7 +29,7 @@ namespace API
             // Singleton:   Start on the time of application start > end on shutdown
             services.AddScoped<IProductRepository,ProductRepository>();
             services.AddScoped(typeof(IGenericRepository<>),(typeof(GenericRepository<>)));
-            services.AddAutoMapper(typeof(MappingPrpfiles));
+            services.AddAutoMapper(typeof(MappingProfiles));
             services.AddControllers();
             services.AddDbContext<StoreContext>(c=>
             c.UseSqlite(_config.GetConnectionString("DefaultConnection")));
