@@ -6,7 +6,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Infrastructure.Data;
 using Core.Interfaces;
-
+using API.Helpers;
+using AutoMapper;
 namespace API
 {
     public class Startup
@@ -28,6 +29,7 @@ namespace API
             // Singleton:   Start on the time of application start > end on shutdown
             services.AddScoped<IProductRepository,ProductRepository>();
             services.AddScoped(typeof(IGenericRepository<>),(typeof(GenericRepository<>)));
+            services.AddAutoMapper(typeof(MappingPrpfiles));
             services.AddControllers();
             services.AddDbContext<StoreContext>(c=>
             c.UseSqlite(_config.GetConnectionString("DefaultConnection")));
