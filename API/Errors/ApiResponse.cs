@@ -19,7 +19,7 @@ namespace API.Errors
                 0=>"No Result Returned",                
                 400=>"Bad Requet",
                 401=> "Not Authorized",
-                404=>"Page Not found - check the spelling or your internet connection",
+                404=>"Not Found",
                 500=>"Server Error" ,
                 _=>null               
             };
