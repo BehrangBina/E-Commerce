@@ -8,6 +8,10 @@ using Infrastructure.Data;
 using Core.Interfaces;
 using API.Helpers;
 using AutoMapper;
+using API.Middlewear;
+using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using API.Errors;
 namespace API
 {
     public class Startup
@@ -34,16 +38,30 @@ namespace API
             services.AddDbContext<StoreContext>(c=>
             c.UseSqlite(_config.GetConnectionString("DefaultConnection")));
             
+            services.Configure<ApiBehaviorOptions>(options=>
+            options.InvalidModelStateResponseFactory=ActionContext=>{
+                var error = ActionContext.ModelState
+                .Where(error=>error.Value.Errors.Count>0)
+                .SelectMany(x=>x.Value.Errors)
+                .Select(x=>x.ErrorMessage).ToArray();
+
+                var errorResponse = new ApiValidationErrorResponse{Errors=error};
+                return new BadRequestObjectResult(errorResponse);
+            });
+  
         }
         // middleware
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseMiddleware<ExceptionMiddleware>();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            //  Error page 
+            app.UseStatusCodePagesWithReExecute("/errors/{0}");
+            
             app.UseHttpsRedirection();
 
             app.UseRouting();

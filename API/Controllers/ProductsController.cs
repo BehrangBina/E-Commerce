@@ -5,15 +5,12 @@ using Core.Interfaces;
 using Core.Entities;
 using Core.Specification;
 using API.DTos;
-using System.Reflection;
-using System.Linq;
 using AutoMapper;
 
 namespace API.Controllers
 {
-    [ApiController]
-    [Route("/api/[controller]")]
-    public class ProductsController : ControllerBase
+ 
+    public class ProductsController : BaseApiController
     {     
         private readonly IGenericRepository<Product> _productRepo;
         private readonly IGenericRepository<ProductBrand> _productBrandRepo;
