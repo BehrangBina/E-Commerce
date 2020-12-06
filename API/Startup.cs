@@ -12,6 +12,8 @@ using API.Middlewear;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using API.Errors;
+using Microsoft.OpenApi.Models;
+
 namespace API
 {
     public class Startup
@@ -48,6 +50,10 @@ namespace API
                 var errorResponse = new ApiValidationErrorResponse{Errors=error};
                 return new BadRequestObjectResult(errorResponse);
             });
+            services.AddSwaggerGen(c=>c.SwaggerDoc(
+                "v1", new OpenApiInfo{Title="Mojo Design Collection API",Version="v1"}
+            ));
+            
   
         }
         // middleware
@@ -67,7 +73,11 @@ namespace API
             app.UseRouting();
             app.UseStaticFiles();
             app.UseAuthorization();
-
+            // Dev Endpoint Documentation :: https://localhost:5001/swagger/index.html
+            app.UseSwagger();
+            app.UseSwaggerUI(c=>
+                {c.SwaggerEndpoint("/swagger/v1/swagger.json", "Mojo Design Collection API v1");}
+                );
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
