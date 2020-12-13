@@ -15,7 +15,7 @@ namespace API
     public class Startup
     {
         private readonly IConfiguration _config;
-
+        readonly string MyAllowSpecificOrigins = "CrosPolicy";
         public Startup( IConfiguration config)
         {
             _config = config;
@@ -34,8 +34,15 @@ namespace API
             
             services.AddApplicationServices();
             services.AddSwaggerDocumentation();
-            
-  
+            // using headers P1 ?? opt
+            services.AddCors(options =>
+        {
+            options.AddPolicy(name: MyAllowSpecificOrigins,
+                              builder =>
+                              {
+                                  builder.WithOrigins("https://localhost:4200");
+                              });
+        });  
         }
         // middleware
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,6 +60,8 @@ namespace API
 
             app.UseRouting();
             app.UseStaticFiles();
+            // using headers P2 ?? opt
+            app.UseCors(MyAllowSpecificOrigins);
             app.UseAuthorization();
             app.UseSwaggerDocumentation();
             app.UseEndpoints(endpoints =>
