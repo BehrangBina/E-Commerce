@@ -31,9 +31,10 @@ namespace API.Controllers
 
         //  https://localhost:5001/api/products
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyCollection<Product>>> GetProducts(string sort,int? brandId,int? typeId)
+        // [FromQuery] bond object to pram
+        public async Task<ActionResult<IReadOnlyCollection<Product>>> GetProducts([FromQuery]ProductSpecParams productParmameter)
         {
-            var spec = new ProductsWithTypesAndBrandSpecification(sort,brandId,typeId);
+            var spec = new ProductsWithTypesAndBrandSpecification(productParmameter);
             var products = await _productRepo.ListAsync(spec);
 
             return Ok(_mapper
