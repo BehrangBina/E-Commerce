@@ -8,6 +8,7 @@ using API.DTos;
 using AutoMapper;
 using API.Errors;
 using Microsoft.AspNetCore.Http;
+using API.Helpers;
 
 namespace API.Controllers
 {
@@ -32,15 +33,18 @@ namespace API.Controllers
         //  https://localhost:5001/api/products
         [HttpGet]
         // [FromQuery] bond object to pram
-        public async Task<ActionResult<IReadOnlyCollection<Product>>> GetProducts([FromQuery]ProductSpecParams productParmameter)
+        public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts([FromQuery]ProductSpecParams productParmameters)
         {
-            var spec = new ProductsWithTypesAndBrandSpecification(productParmameter);
+            var spec = new ProductsWithTypesAndBrandSpecification(productParmameters);
             var products = await _productRepo.ListAsync(spec);
-
-            return Ok(_mapper
+            var countSpec = new ProductWithFiltersWithCountSpecification(productParmameters);
+            var totalItems= await _productRepo.CountAsync(countSpec);
+            var data= _mapper
             .Map<
             IReadOnlyCollection<Product>,
-            IReadOnlyCollection<ProductToReturnDto>>(products));
+            IReadOnlyCollection<ProductToReturnDto>>(products);
+            return Ok(new Pagination<ProductToReturnDto>
+            (productParmameters.PageIndex,productParmameters.PageSize,totalItems,data));
         }
 
         //  https://localhost:5001/api/products/12
@@ -55,7 +59,7 @@ namespace API.Controllers
             return _mapper.Map<Product, ProductToReturnDto>(product);
         }
         [HttpGet("Brands")]
-        public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetProductBrandAsync()
+        public async Task<ActionResult<Pagination<ProductBrand>>> GetProductBrandAsync()
         {
             return Ok(await _productBrandRepo.ListAllAsync());
         }
