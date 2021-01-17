@@ -16,3 +16,10 @@
 * Swashbuckle.AspNetCore
 * https://www.nuget.org/packages/Swashbuckle.AspNetCore.SwaggerUI/
 * washbuckle.AspNetCore.SwaggerGen 
+
+## Enable Bootstrap in Angular
+ ng add ngx-bootstrap > client app
+
+## Install fontAwesome
+* npm install font-awesome
+* adding css   "./node_modules/font-awesome/css/font-awesome.min.css",
