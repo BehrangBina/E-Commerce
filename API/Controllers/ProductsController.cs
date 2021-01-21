@@ -35,10 +35,11 @@ namespace API.Controllers
         // [FromQuery] bond object to pram
         public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts([FromQuery]ProductSpecParams productParmameters)
         {
-            var spec = new ProductsWithTypesAndBrandSpecification(productParmameters);
-            var products = await _productRepo.ListAsync(spec);
+            var spec = new ProductsWithTypesAndBrandSpecification(productParmameters);          
             var countSpec = new ProductWithFiltersWithCountSpecification(productParmameters);
             var totalItems= await _productRepo.CountAsync(countSpec);
+            var products = await _productRepo.ListAsync(spec);
+
             var data= _mapper
             .Map<
             IReadOnlyCollection<Product>,
