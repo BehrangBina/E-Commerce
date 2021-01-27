@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using API.DTos;
+using API.Dtos;
 
 namespace API.Helpers
 {

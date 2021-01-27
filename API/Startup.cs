@@ -1,14 +1,14 @@
+using API.Extensions;
+using API.Helpers;
+using API.Middlewear;
+using AutoMapper;
+using Infrastructure.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.EntityFrameworkCore;
-using Infrastructure.Data;
-using API.Helpers;
-using AutoMapper;
-using API.Middlewear;
-using API.Extensions;
 
 namespace API
 {
@@ -29,6 +29,7 @@ namespace API
  
             services.AddAutoMapper(typeof(MappingProfiles));
             services.AddControllers();
+            services.AddMvc();
             services.AddDbContext<StoreContext>(c=>
             c.UseSqlite(_config.GetConnectionString("DefaultConnection")));
             

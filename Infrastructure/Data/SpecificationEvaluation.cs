@@ -1,6 +1,6 @@
 using System.Linq;
 using Core.Entities;
-using Core.Specification;
+using Core.Specifications;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Data
@@ -16,8 +16,8 @@ namespace Infrastructure.Data
             if(spec.OrderBy !=null){
                 query=query.OrderBy(spec.OrderBy);
             }
-            if(spec.OrderByDesc!=null){
-                query=query.OrderByDescending(spec.OrderByDesc);
+            if(spec.OrderByDescending!=null){
+                query=query.OrderByDescending(spec.OrderByDescending);
             }
             if(spec.IsPagingEnabled){
                 query=query.Skip(spec.Skip).Take(spec.Take);

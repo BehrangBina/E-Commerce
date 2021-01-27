@@ -23,3 +23,6 @@
 ## Install fontAwesome
 * npm install font-awesome
 * adding css   "./node_modules/font-awesome/css/font-awesome.min.css",
+
+Create module:          ng g m shop
+Create component:       ng g c shop
