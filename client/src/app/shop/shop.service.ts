@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IPagination } from '../models/pagination';
+import { IBrand } from '../models/brand';
+import { IType } from '../models/productTypes';
 @Injectable({
   providedIn: 'root',
 })
@@ -10,5 +12,11 @@ export class ShopService {
 
   getProducts() {
     return this.http.get<IPagination>(this.baseUrl + 'products?pageSize=50');
+  }
+  getBrands() {
+    return this.http.get<IBrand[]>(this.baseUrl + 'products/brands');
+  }
+  getTypes() {
+    return this.http.get<IType[]>(this.baseUrl + 'products/types');
   }
 }
