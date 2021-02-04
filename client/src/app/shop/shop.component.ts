@@ -1,4 +1,3 @@
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { IBrand } from '../models/brand';
 import { IProduct } from '../models/product';
@@ -14,9 +13,12 @@ import { ShopService } from './shop.service';
   styleUrls: ['./shop.component.scss'],
 })
 export class ShopComponent implements OnInit {
-  products: IProduct[] = [];
   types: IType[] = [];
   brands: IBrand[] = [];
+  brandIdSelected!: number;
+  typeIdSelected!: number;
+  products: IProduct[] | undefined;
+
   constructor(private shopService: ShopService) {}
 
   ngOnInit(): void {
@@ -24,34 +26,47 @@ export class ShopComponent implements OnInit {
     this.getProducts();
     this.getTypes();
   }
-  getProducts(){
-    this.shopService.getProducts().subscribe(
-      (res) => {
-        this.products = res.data1;
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+  getProducts(): void {
+    this.shopService
+      .getProducts(this.brandIdSelected, this.typeIdSelected)
+      .subscribe(
+        (res) => {
+          this.products = res?.data1;
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
   }
-  getBrands(){
+  getBrands(): void {
     this.shopService.getBrands().subscribe(
       (res) => {
-        this.brands = res;
+        // this.brands = res;
+        // ... Spread operator: spread all of the objects from that array and is simply adding
+        this.brands = [{ id: 0, name: 'All' }, ...res];
       },
       (err) => {
         console.log(err);
       }
     );
   }
-  getTypes(){
+  getTypes(): void {
     this.shopService.getTypes().subscribe(
       (res) => {
-        this.types = res;
+       // this.types = res;
+       this.types = [{ id: 0, name: 'All' }, ...res];
       },
       (err) => {
         console.log(err);
       }
     );
+  }
+  onBrandSelected(brandId: number): void {
+    this.brandIdSelected = brandId;
+    this.getProducts();
+  }
+  onTypeSelected(typeId: number): void {
+    this.typeIdSelected = typeId;
+    this.getProducts();
   }
 }
