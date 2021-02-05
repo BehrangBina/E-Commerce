@@ -11,14 +11,14 @@ export class ShopService {
   baseUrl = 'https://localhost:5001/api/';
   constructor(private http: HttpClient) {}
   // ? for optional
-  getProducts(brnadId?: number, typeId?: number) {
+  getProducts(brandId?: number, typeId?: number) {
     let params = new HttpParams();
 
-    if (brnadId) {
-      params.append('brandId', brnadId.toString());
+    if (brandId) {
+      params = params.append('brandId', brandId.toString());
     }
     if (typeId) {
-      params.append('typeId', typeId.toString());
+      params = params.append('typeId', typeId.toString());
     }
     // pipe is a wrapper around any rxjs method operators that we want to use
     // chain operators as we want inside request
