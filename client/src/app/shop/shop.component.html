@@ -7,7 +7,7 @@
   <div class="row">
     <section class="col-3">
       <h5 class="text-warning ml-3">Sort</h5>
-      <select name="sort" id="sort" class="custom-search mb-3" (change)="onSortSelected($event.target.value)">
+      <select name="sort" id="sort" class="custom-search mb-3" (change)="onSortSelected($any($event.target).value)">
         <!-- <option selected>A-Z</option>
         <option>Z-A</option>
         <option>Price High-Low</option>
