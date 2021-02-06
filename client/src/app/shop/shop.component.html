@@ -7,12 +7,13 @@
   <div class="row">
     <section class="col-3">
       <h5 class="text-warning ml-3">Sort</h5>
-      <select name="sort" id="sort" class="custom-search mb-3">
-        <option selected>A-Z</option>
+      <select name="sort" id="sort" class="custom-search mb-3" (change)="onSortSelected($event.target.value)">
+        <!-- <option selected>A-Z</option>
         <option>Z-A</option>
         <option>Price High-Low</option>
-        <option>Price Low-High</option>
-
+        <option>Price Low-High</option> -->
+<option *ngFor="let sort of sortOptions"
+[value]="sort.value">{{sort.name}}</option>
       </select>
       <h5 class="text-warning ml-3">Brand</h5>
       <ul class="list-group my-4">

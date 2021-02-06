@@ -15,10 +15,16 @@ import { ShopService } from './shop.service';
 export class ShopComponent implements OnInit {
   types: IType[] = [];
   brands: IBrand[] = [];
-  brandIdSelected!: number;
-  typeIdSelected!: number;
-  products: IProduct[] | undefined;
+  brandIdSelected = 0;
+  typeIdSelected = 0;
 
+  products: IProduct[] | undefined;
+  sortSelected = 'name';
+  sortOptions = [
+    {name: 'Alphabetical', value: 'name'},
+    {name: 'Price: Low to High', value: 'priceAsc'},
+    {name: 'Price: High to Low', value: 'priceDesc'}
+  ];
   constructor(private shopService: ShopService) {}
 
   ngOnInit(): void {
@@ -28,7 +34,7 @@ export class ShopComponent implements OnInit {
   }
   getProducts(): void {
     this.shopService
-      .getProducts(this.brandIdSelected, this.typeIdSelected)
+      .getProducts(this.brandIdSelected, this.typeIdSelected, this.sortSelected)
       .subscribe(
         (res) => {
           this.products = res?.data1;
@@ -67,6 +73,10 @@ export class ShopComponent implements OnInit {
   }
   onTypeSelected(typeId: number): void {
     this.typeIdSelected = typeId;
+    this.getProducts();
+  }
+  onSortSelected(sort: string): void{
+    this.sortSelected = sort;
     this.getProducts();
   }
 }
