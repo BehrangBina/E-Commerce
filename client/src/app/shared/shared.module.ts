@@ -2,11 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { PagerComponent } from './componetns/pager/pager.component';
 
 
 @NgModule({
-  declarations: [],
-  imports: [CommonModule,PaginationModule.forRoot()],
-  exports: [PaginationModule]
+  declarations: [PagerComponent],
+  imports: [CommonModule, PaginationModule.forRoot()],
+  exports: [PaginationModule, PagerComponent]
 })
 export class SharedModule {}
