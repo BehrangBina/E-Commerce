@@ -39,7 +39,7 @@
       <div class="d-flex justify-content-between align-items-center pb-2">
         <header>
           <span *ngIf="totalCount && totalCount>0">
-            Showing <strong>{{this.shopParams.getPageFrom()}} - {{shopParams.getPageTo()}}
+            Showing <strong>{{this.shopParams.getPageFrom()}} - {{shopParams.getPageTo(this.totalCount)}}
               </strong> of <strong>{{this.totalCount}}</strong> Results
           </span>
           <span *ngIf="totalCount===0">

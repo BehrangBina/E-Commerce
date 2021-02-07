@@ -5,6 +5,7 @@ import { IBrand } from '../models/brand';
 import { IType } from '../models/productTypes';
 import { delay, map } from 'rxjs/operators';
 import { ShopParams } from '../models/shopParams';
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
@@ -12,7 +13,7 @@ export class ShopService {
   baseUrl = 'https://localhost:5001/api/';
   constructor(private http: HttpClient) {}
   // ? for optional
-  getProducts(shopParams: ShopParams) {
+  getProducts(shopParams: ShopParams): Observable<IPagination|null> {
     let params = new HttpParams();
 
     if (shopParams.brandId !== 0) {
@@ -40,10 +41,10 @@ export class ShopService {
         })
       );
   }
-  getBrands() {
+  getBrands(): Observable<IBrand[]> {
     return this.http.get<IBrand[]>(this.baseUrl + 'products/brands');
   }
-  getTypes() {
+  getTypes(): Observable<IType[]> {
     return this.http.get<IType[]>(this.baseUrl + 'products/types');
   }
 }
