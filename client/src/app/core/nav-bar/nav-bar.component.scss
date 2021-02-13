@@ -10,3 +10,17 @@
   top:-12px;
   right:32px;
 }
+
+  a{
+  text-decoration: none;
+  color: #343a34 !important;
+
+  &.active{color: orange !important;}
+
+}
+
+.logo{
+  outline: none;
+  cursor: pointer;
+
+}

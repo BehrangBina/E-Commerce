@@ -6,6 +6,7 @@ import { IType } from '../models/productTypes';
 import { delay, map } from 'rxjs/operators';
 import { ShopParams } from '../models/shopParams';
 import { Observable } from 'rxjs';
+import { IProduct } from '../models/product';
 @Injectable({
   providedIn: 'root',
 })
@@ -13,7 +14,7 @@ export class ShopService {
   baseUrl = 'https://localhost:5001/api/';
   constructor(private http: HttpClient) {}
   // ? for optional
-  getProducts(shopParams: ShopParams): Observable<IPagination|null> {
+  getProducts(shopParams: ShopParams): Observable<IPagination | null> {
     let params = new HttpParams();
 
     if (shopParams.brandId !== 0) {
@@ -22,7 +23,7 @@ export class ShopService {
     if (shopParams.typeId !== 0) {
       params = params.append('typeId', shopParams.typeId.toString());
     }
-    if (shopParams.search){
+    if (shopParams.search) {
       params = params.append('search', shopParams.search);
     }
     params = params.append('sort', shopParams.sort);
@@ -43,6 +44,10 @@ export class ShopService {
           return response.body;
         })
       );
+  }
+  getProduct(id: number): Observable<IProduct> {
+
+    return this.http.get<IProduct>(this.baseUrl + 'products/' + id);
   }
   getBrands(): Observable<IBrand[]> {
     return this.http.get<IBrand[]>(this.baseUrl + 'products/brands');
