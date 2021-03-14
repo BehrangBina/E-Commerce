@@ -7,12 +7,12 @@ import { ProductDetailsComponent } from './shop/product-details/product-details.
 import { ShopComponent } from './shop/shop.component';
 
 const routes: Routes = [
-  {path: ''         , component: HomeComponent},
-  {path: 'server-error', component: ServerErrorComponent},
-  {path: 'not-found', component: NotFoundComponent},
+  {path: ''         , component: HomeComponent, data:{breadcrumb: 'Home'}},
+  {path: 'server-error', component: ServerErrorComponent, data:{breadcrumb: 'Server Errors'}},
+  {path: 'not-found', component: NotFoundComponent, data:{breadcrumb: 'Not Found'}},
   // Lazy Loading only loaded when shop component is accessed
   {path: 'shop' , loadChildren: () => import('./shop/shop.module').then(mod => mod.ShopModule)},
-  {path: '**'       , redirectTo: '', pathMatch: 'full'} // redirect to home if any incorrect
+  {path: '**'       , redirectTo: 'not-found', pathMatch: 'full'} // redirect to home if any incorrect
 ];
 
 @NgModule({
