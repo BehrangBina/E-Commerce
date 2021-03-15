@@ -2,6 +2,7 @@
 <div class="col">
   <div class="card shadow-sm hr-100 mb-4">
     <img src="{{product.pictureUrl}}" alt="{{product.name}}" class="img-fluid product-card">
+
     <div class="card-body">
       <!-- {{product.description}} -->
       <a routerLink="/shop/{{product.id}}" ><h6 class="text-uppercase">{{product.name}}</h6></a>
@@ -9,11 +10,12 @@
 
         <br/><hr/>
         <span class="mb-2 mr-2">{{product.price | currency}}</span>
-        <div class="btn-group  mt-auto">
-          <button type="button" class="btn  btn-outline-secondary fa fa-shopping-cart mr-1"></button>
-          <button routerLink="/shop/{{product.id}}" type="button" class="btn  btn-outline-secondary">View</button>
-        </div>
+
        </div>
+       <div class="d-flex align-item-center justify-content-center hover-overlay">
+        <button type="button" class="btn  btn-outline-secondary fa fa-shopping-cart mr-1"></button>
+        <button routerLink="/shop/{{product.id}}" type="button" class="btn  btn-outline-secondary">View</button>
+      </div>
     </div>
   </div>
 </div>

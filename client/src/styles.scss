@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+.xng-breadcrump-root{
+  padding: 8px 16px;
+  display: inline;
+  border-radius: 0;
+}
+label.xng-breadcrumb-trail{
+  margin-bottom: 0%;
+  color:orange  !important;
+  font-weight: bold;
+}
+.xng-breadcrump-seprator{
+  padding: 0 0;
+}
+
+* {
+	outline: none;
+}

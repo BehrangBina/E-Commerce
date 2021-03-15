@@ -1,8 +1,9 @@
-<section class="py-5 page-header" >
+<ng-container *ngIf="(breadCrumb$ | async) as breadcrumbs">
+<section class="py-5 page-header" *ngIf="breadcrumbs.length>0 && breadcrumbs[breadcrumbs.length-1].label !== 'Home'">
   <div class="container">
     <div class="row d-flex align-items-center">
       <div class="col-9">
-        <h1>Title Goes Here</h1>
+        <h1>{{breadcrumbs.length>0 && breadcrumbs[breadcrumbs.length-1].label}}</h1>
       </div>
       <div class="col-3">
        <xng-breadcrumb></xng-breadcrumb>
@@ -10,3 +11,4 @@
     </div>
   </div>
 </section>
+</ng-container>
