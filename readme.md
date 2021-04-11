@@ -26,3 +26,5 @@
 
 Create module:          ng g m shop
 Create component:       ng g c shop
+
+Bootstrap Theme : npm i bootswatch
