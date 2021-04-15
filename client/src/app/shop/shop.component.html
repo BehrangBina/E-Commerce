@@ -3,9 +3,10 @@
     {{product.name}}
   </li>
 </ul> -->
-<div class="container">
+<div class="container" *ngIf="types && brands">
   <div class="row">
     <section class="col-3">
+      <ng-container>
       <h5 class="text-warning ml-3">Sort</h5>
       <select name="sort" id="sort" class="custom-search mb-3" (change)="onSortSelected($any($event.target).value)">
         <!-- <option selected>A-Z</option>
@@ -33,6 +34,7 @@
         [value]="type.id"
         (click)="onTypeSelected(type.id)">{{type.name}}</li>
       </ul>
+    </ng-container>
     </section>
     <!-- products -->
     <section class="col-9">
@@ -47,7 +49,7 @@
           </span>
         </header>
 
-        <div class="form-inline mt-2">
+        <div class="form-inline mt-2" *ngIf="products">
           <input (keyup.enter)= "onSearch()" type="text" class="form-control" style="width: 300px;" placeholder="Search" #search>
           <button class="btn btn-outline-primary my-2" (click)="onSearch()"> Search </button>
           <button class="btn btn-outline-success my-2" (click)="onReset()"> Reset </button>
