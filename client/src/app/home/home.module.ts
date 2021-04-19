@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ShopModule } from '../shop/shop.module';
 import { HomeComponent } from './home.component';
-
+import {CarouselModule} from 'ngx-bootstrap/carousel'
 @NgModule({
   declarations: [HomeComponent],
   imports: [
-    CommonModule
+    CommonModule, CarouselModule
   ],
-  exports: [HomeComponent]
+  exports: [HomeComponent, CarouselModule]
 })
 export class HomeModule { }
